@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Rose Day Gift 🌹</title>
+<title>Rose Day 🌹</title>
 
 <style>
 * {
@@ -19,66 +19,70 @@ body {
   cursor: pointer;
 }
 
-/* 🌹 ROSE GARDEN BACKGROUND */
+/* 🌸 UNSPLASH BACKGROUND */
 .bg {
   position: fixed;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(255,143,177,0.25), rgba(255,95,162,0.25)),
-    url("https://www.freepik.com/free-vector/background-with-red-roses_835654.htm#fromView=keyword&page=1&position=3&uuid=64e79663-b5b6-406f-9b87-65dccda4e944&query=Rose+background");
+  background-image: url("https://source.unsplash.com/UrF1Jf5PamQ/1920x1080");
   background-size: cover;
   background-position: center;
-  transition: filter 1s ease, opacity 1s ease;
+  transition: filter 1s ease;
   z-index: -2;
 }
 
-/* Overlay for soft romantic tone */
-.bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(circle at top, rgba(255,255,255,0.2), rgba(255,0,120,0.25));
-}
-
-/* 🌹 FIRST SCREEN */
+/* 🌹 SCREENS */
 .screen {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition: opacity 0.9s ease, transform 0.9s ease;
 }
 
+/* 🌷 INTRO */
 .intro {
   text-align: center;
   color: #fff;
+  text-shadow: 0 6px 20px rgba(0,0,0,0.35);
 }
 
 .intro h1 {
-  font-size: 2.3rem;
-  margin-bottom: 20px;
+  font-size: 2.4rem;
+  margin-bottom: 22px;
+  animation: floatIn 1.5s ease forwards;
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .claim-btn {
-  padding: 14px 30px;
-  font-size: 1rem;
-  border-radius: 30px;
+  padding: 16px 36px;
+  font-size: 1.05rem;
+  border-radius: 40px;
   border: none;
   background: #ff4f9a;
   color: #fff;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
   cursor: pointer;
-  animation: pulse 1.5s infinite;
+  animation: pulse 1.6s infinite;
 }
 
 @keyframes pulse {
   0% { transform: scale(1); }
-  50% { transform: scale(1.08); }
+  50% { transform: scale(1.1); }
   100% { transform: scale(1); }
 }
 
-/* 🌹 SECOND SCREEN */
+/* 🌸 MAIN CONTENT */
 .content {
   opacity: 0;
   pointer-events: none;
@@ -86,27 +90,41 @@ body {
 }
 
 .card {
-  background: rgba(255,255,255,0.18);
-  backdrop-filter: blur(12px);
-  padding: 32px 26px;
-  border-radius: 22px;
-  max-width: 360px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(14px);
+  padding: 36px 28px;
+  border-radius: 26px;
+  max-width: 380px;
   text-align: center;
   color: #fff;
-  box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
 }
 
-.card h2 {
-  font-size: 2rem;
+/* ✨ ANIMATED MAIN TEXT */
+.animate-text {
+  animation: glowText 2.2s ease forwards;
+}
+
+@keyframes glowText {
+  0% {
+    opacity: 0;
+    letter-spacing: 6px;
+    text-shadow: none;
+  }
+  100% {
+    opacity: 1;
+    letter-spacing: 1px;
+    text-shadow: 0 0 18px rgba(255,255,255,0.7);
+  }
 }
 
 .roses {
-  font-size: 1.9rem;
-  margin: 14px 0;
+  font-size: 2rem;
+  margin: 16px 0;
 }
 
 .pickup {
-  margin-top: 15px;
+  margin-top: 16px;
   font-style: italic;
   color: #fff0f6;
 }
@@ -115,7 +133,7 @@ body {
 .rose {
   position: absolute;
   top: -50px;
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   animation: fall linear infinite;
   pointer-events: none;
 }
@@ -140,6 +158,25 @@ body {
     opacity: 0;
   }
 }
+
+/* ✨ SPARKLES */
+.sparkle {
+  position: absolute;
+  font-size: 0.8rem;
+  animation: sparkle 1s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes sparkle {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(2);
+  }
+}
 </style>
 </head>
 
@@ -147,41 +184,40 @@ body {
 
 <div class="bg" id="bg"></div>
 
-<!-- 🌹 INTRO SCREEN -->
+<!-- 🌸 INTRO -->
 <div class="screen intro" id="intro">
   <div>
-    <h1>A Rose Garden Just for You 🌹</h1>
+    <h1>A Rose Garden for You 🌸</h1>
     <button class="claim-btn" onclick="revealGift()">Tap to claim your gift 🎁</button>
   </div>
 </div>
 
-<!-- 🌹 MAIN CONTENT -->
+<!-- 🌹 MAIN -->
 <div class="screen content" id="content">
   <div class="card">
-    <h2>Happy Rose Day 🌹</h2>
+    <h2 class="animate-text">Happy Rose Day 🌹</h2>
 
     <div class="roses">🌹🌸🤍🌹🌸</div>
 
-    <p>
-      Some people bring flowers.<br>
-      I wanted to bring a feeling.
+    <p class="animate-text">
+      A garden of feelings,<br> not just flowers.
     </p>
 
-    <p class="pickup">
-      “If roses had competition, they’d lose the moment you walked in.” 💖
+    <p class="pickup animate-text">
+      “Every petal feels softer once you smile.” 💖
     </p>
   </div>
 </div>
 
 <script>
-/* 🎁 Reveal second slide */
+/* 🎁 Reveal */
 function revealGift() {
-  document.getElementById("intro").style.opacity = "0";
-  document.getElementById("intro").style.pointerEvents = "none";
-  document.getElementById("content").style.opacity = "1";
-  document.getElementById("content").style.pointerEvents = "auto";
-  document.getElementById("content").style.transform = "scale(1)";
-  document.getElementById("bg").style.filter = "blur(4px)";
+  intro.style.opacity = "0";
+  intro.style.pointerEvents = "none";
+  content.style.opacity = "1";
+  content.style.pointerEvents = "auto";
+  content.style.transform = "scale(1)";
+  bg.style.filter = "blur(5px)";
 }
 
 /* 🌹 Falling Roses */
@@ -191,24 +227,38 @@ for (let i = 0; i < 30; i++) {
   r.innerText = "🌹";
   r.style.left = Math.random() * 100 + "vw";
   r.style.animationDuration = 5 + Math.random() * 6 + "s";
-  r.style.fontSize = 1 + Math.random() * 1.5 + "rem";
+  r.style.fontSize = 1 + Math.random() * 1.6 + "rem";
   document.body.appendChild(r);
 }
 
-/* 💖 Click Heart Burst */
+/* 💖 Heart Burst */
 document.addEventListener("click", e => {
   for (let i = 0; i < 6; i++) {
     const h = document.createElement("div");
     h.className = "heart";
-    h.innerText = "❤️";
+    h.innerText = "💖";
     h.style.left = e.clientX + "px";
     h.style.top = e.clientY + "px";
-    h.style.setProperty("--x", (Math.random()-0.5)*120 + "px");
-    h.style.setProperty("--y", (Math.random()-0.5)*120 + "px");
+    h.style.setProperty("--x", (Math.random()-0.5)*140 + "px");
+    h.style.setProperty("--y", (Math.random()-0.5)*140 + "px");
     document.body.appendChild(h);
     setTimeout(() => h.remove(), 1000);
   }
 });
+
+/* ✨ Sparkles on scroll / touch */
+document.addEventListener("mousemove", sparkleEffect);
+document.addEventListener("touchmove", e => sparkleEffect(e.touches[0]));
+
+function sparkleEffect(e) {
+  const s = document.createElement("div");
+  s.className = "sparkle";
+  s.innerText = "✨";
+  s.style.left = e.clientX + "px";
+  s.style.top = e.clientY + "px";
+  document.body.appendChild(s);
+  setTimeout(() => s.remove(), 1000);
+}
 </script>
 
 </body>
