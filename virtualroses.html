@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rose Day Gift 🌹</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  height: 100vh;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* 🌹 ROSE GARDEN BACKGROUND */
+.bg {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,143,177,0.25), rgba(255,95,162,0.25)),
+    url("https://images.unsplash.com/photo-1509042239860-f550ce710b93");
+  background-size: cover;
+  background-position: center;
+  transition: filter 1s ease, opacity 1s ease;
+  z-index: -2;
+}
+
+/* Overlay for soft romantic tone */
+.bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(255,255,255,0.2), rgba(255,0,120,0.25));
+}
+
+/* 🌹 FIRST SCREEN */
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.intro {
+  text-align: center;
+  color: #fff;
+}
+
+.intro h1 {
+  font-size: 2.3rem;
+  margin-bottom: 20px;
+}
+
+.claim-btn {
+  padding: 14px 30px;
+  font-size: 1rem;
+  border-radius: 30px;
+  border: none;
+  background: #ff4f9a;
+  color: #fff;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  cursor: pointer;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+/* 🌹 SECOND SCREEN */
+.content {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.95);
+}
+
+.card {
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(12px);
+  padding: 32px 26px;
+  border-radius: 22px;
+  max-width: 360px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+}
+
+.card h2 {
+  font-size: 2rem;
+}
+
+.roses {
+  font-size: 1.9rem;
+  margin: 14px 0;
+}
+
+.pickup {
+  margin-top: 15px;
+  font-style: italic;
+  color: #fff0f6;
+}
+
+/* 🌹 FALLING ROSES */
+.rose {
+  position: absolute;
+  top: -50px;
+  font-size: 1.5rem;
+  animation: fall linear infinite;
+  pointer-events: none;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+/* 💖 HEART BURST */
+.heart {
+  position: absolute;
+  animation: burst 1s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes burst {
+  from { transform: scale(1); opacity: 1; }
+  to {
+    transform: translate(var(--x), var(--y)) scale(1.8);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="bg" id="bg"></div>
+
+<!-- 🌹 INTRO SCREEN -->
+<div class="screen intro" id="intro">
+  <div>
+    <h1>A Rose Garden Just for You 🌹</h1>
+    <button class="claim-btn" onclick="revealGift()">Tap to claim your gift 🎁</button>
+  </div>
+</div>
+
+<!-- 🌹 MAIN CONTENT -->
+<div class="screen content" id="content">
+  <div class="card">
+    <h2>Happy Rose Day 🌹</h2>
+
+    <div class="roses">🌹🌸🤍🌹🌸</div>
+
+    <p>
+      Some people bring flowers.<br>
+      I wanted to bring a feeling.
+    </p>
+
+    <p class="pickup">
+      “If roses had competition, they’d lose the moment you walked in.” 💖
+    </p>
+  </div>
+</div>
+
+<script>
+/* 🎁 Reveal second slide */
+function revealGift() {
+  document.getElementById("intro").style.opacity = "0";
+  document.getElementById("intro").style.pointerEvents = "none";
+  document.getElementById("content").style.opacity = "1";
+  document.getElementById("content").style.pointerEvents = "auto";
+  document.getElementById("content").style.transform = "scale(1)";
+  document.getElementById("bg").style.filter = "blur(4px)";
+}
+
+/* 🌹 Falling Roses */
+for (let i = 0; i < 30; i++) {
+  const r = document.createElement("div");
+  r.className = "rose";
+  r.innerText = "🌹";
+  r.style.left = Math.random() * 100 + "vw";
+  r.style.animationDuration = 5 + Math.random() * 6 + "s";
+  r.style.fontSize = 1 + Math.random() * 1.5 + "rem";
+  document.body.appendChild(r);
+}
+
+/* 💖 Click Heart Burst */
+document.addEventListener("click", e => {
+  for (let i = 0; i < 6; i++) {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerText = "❤️";
+    h.style.left = e.clientX + "px";
+    h.style.top = e.clientY + "px";
+    h.style.setProperty("--x", (Math.random()-0.5)*120 + "px");
+    h.style.setProperty("--y", (Math.random()-0.5)*120 + "px");
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 1000);
+  }
+});
+</script>
+
+</body>
+</html>
